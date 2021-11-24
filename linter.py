@@ -105,8 +105,6 @@ def check_more_equally (s):
 
 with open("example.txt", "r") as file:
 	line = list(file)
-	print(line,file)
-	flag = check_plus(line[i])
 for i in range(len(line)):
 	flag = check_plus((line[i]))
 	flag = check_or(line[i])
@@ -117,3 +115,4 @@ for i in range(len(line)):
 		FlagGlobal = False
 with open("check_list.txt", "a") as file:
     print(FlagGlobal, file=file)
+#в следущий раз до делаю все сравнительные операции и разберусь что там с минусом как с ним взаимодействовать + комментарии
