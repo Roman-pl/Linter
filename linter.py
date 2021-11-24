@@ -18,7 +18,7 @@ def check_plus (s):
 			a = False
 	return a
 
-def check_plus (s):
+def check_equally (s):
 	a = True
 	while s.find('=') >= 1:
 		if s.find(' = ') >= 1:
@@ -34,6 +34,7 @@ def check_plus (s):
 			s = s.replace(' =','')
 			a = False
 	return a
+
 def check_or (s):
 	a = True
 	while s.find(')or(') or s.find(')or (') or s.find(') or(') >= 1:
@@ -68,17 +69,6 @@ def check_and (s):
 			a = False
 	return a
 
-def check_more_less (s):
-	a = True
-	while s.find('>=') >= 1:
-		if s.find(' >= ') >= 1:
-			a = True
-			s = s.replace(' >= ','')
-		if s.find('>=') >= 1:
-			s = s.replace('>=','')
-			a = False
-	return a
-
 def check_more_equally (s):
 	a = True
 	while s.find('>=') >= 1:
@@ -88,9 +78,15 @@ def check_more_equally (s):
 		if s.find('>=') >= 1:
 			s = s.replace('>=','')
 			a = False
+		elif s.find('>= ') >= 1:
+			s = s.replace('>= ','')
+			a = False
+		elif s.find(' >=') >= 1:
+			s = s.replace(' >=','')
+			a = False
 	return a
 
-def check_less_equally (s):
+def check_more_equally (s):
 	a = True
 	while s.find('<=') >= 1:
 		if s.find(' <= ') >= 1:
@@ -99,16 +95,23 @@ def check_less_equally (s):
 		if s.find('<=') >= 1:
 			s = s.replace('<=','')
 			a = False
+		elif s.find('<= ') >= 1:
+			s = s.replace('<= ','')
+			a = False
+		elif s.find(' <=') >= 1:
+			s = s.replace(' <=','')
+			a = False
 	return a
 
 with open("example.txt", "r") as file:
 	line = list(file)
 	print(line,file)
-for i in range(len(line)):
 	flag = check_plus(line[i])
+for i in range(len(line)):
+	flag = check_plus((line[i]))
 	flag = check_or(line[i])
 	flag = check_and(line[i])
-	flag = more_equally(line[i])
+	flag = check_more_equally(line[i])
 	flag = check_less_equally(line[i])
 	if flag == False:
 		FlagGlobal = False
