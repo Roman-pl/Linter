@@ -22,7 +22,7 @@ def check_plus(s):
 # def check_less(s):
     
 
-def check_ls_eq(s):
+def check_mr_eq(s):
     flag = True
     flag2 = True
     s2 = ' '.join(s.split(' '))
@@ -31,6 +31,21 @@ def check_ls_eq(s):
     else:
         s2 = s2.replace(' >= ','')
         if s2.find('>=') > -1:
+            flag = False
+    if flag == True and flag2 == True:
+        return True
+    else:
+        return False
+
+def check_assg(s):
+    flag = True
+    flag2 = True
+    s2 = ' '.join(s.split(' '))
+    if s != s2:
+        flag2 = False
+    else:
+        s2 = s2.replace(' := ','')
+        if s2.find(':=') > -1:
             flag = False
     if flag == True and flag2 == True:
         return True
@@ -60,16 +75,30 @@ def check_eq(s):
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
-    for i in range(len(s2)):
-        if s[i] == '=':
-            if s[i]+s[i+1] == '= ' and s[i-1]+s[i] == ' =' and s[i+2] != ' ' and s[i-2] != ' ':
-                flag = True
-            else:
-                flag = False
+    else:
+        for i in range(len(s2)):
+            if s2[i] == '=':
+                if s2[i]+s2[i+1] == '= ' and s2[i-1]+s2[i] == ' =' and s2[i+2] != ' ' and s2[i-2] != ' ':
+                    flag = True
+                else:
+                    flag = False
     if flag2 == True and flag == True:
         return True
     else:
         return False
+
+def check_or(s):
+    flag = True
+    flag2 = True
+    s2 = ' '.join(s.split(' '))
+    if s != s2:
+        flag2 = False
+    else:
+        s = s.split(' ')
+        for i in range(len(s)):
+            if s[i].isalnum == False:
+                if s[i].find('or') > -1:
+
 
 with open("example.txt", "r") as file:
     line = list(file)
