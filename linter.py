@@ -3,6 +3,7 @@ FlagGlobal = True
 
 def check_plus(s):
     flag2 = True
+    flag = True
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
@@ -19,6 +20,7 @@ def check_plus(s):
 
 def check_dvsn(s):
     flag2 = True
+    flag = True
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
@@ -54,9 +56,7 @@ def check_more(s):
     else:
         return False
 
-    
 def check_less(s):
-    def check_more(s):
     flag = True
     flag2 = True
     s = s.replace('>=','')
@@ -77,7 +77,6 @@ def check_less(s):
     else:
         return False
     
-
 def check_mr_eq(s):
     flag = True
     flag2 = True
@@ -182,6 +181,33 @@ with open("example.txt", "r") as file:
 for i in range(len(line)):
     if line[i].find('+'):
         if check_plus(line[i]) == False:
+            FlagGlobal = False
+    if line[i].find('and'):
+        if check_and(line[i]) == False:
+            FlagGlobal = False
+    if line[i].find('='):
+        if check_eq(line[i]) == False:
+            FlagGlobal = False
+    if line[i].find('<='):
+        if check_ls_eq(line[i]) == False:
+            FlagGlobal = False
+    if line[i].find('>='):
+        if check_mr_eq(line[i]) == False:
+            FlagGlobal = False
+    if line[i].find(':='):
+        if check_assg(line[i]) == False:
+            FlagGlobal = False
+    if line[i].find('\\'):
+        if check_dvsn(line[i]) == False:
+            FlagGlobal = False
+    if line[i].find('or'):
+        if check_or(line[i]) == False:
+            FlagGlobal = False
+    if line[i].find('<'):
+        if check_less(line[i]) == False:
+            FlagGlobal = False
+    if line[i].find('>'):
+        if check_more(line[i]) == False:
             FlagGlobal = False
 
 with open("check_list.txt", "a") as file:
