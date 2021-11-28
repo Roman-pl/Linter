@@ -149,13 +149,33 @@ def check_or(s):
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
-    def check_or(s):
-    a = s.find('or')
+    a = s2.find('or')
     if a > -1:
         if s2[a-1] == ' ' and  s2[a+2] == ' ':
-            return True
+            flag = True
         elif s2[a-1] == ')' and  s2[a+2] == '(':
-            return False
+            flag = False
+    if flag2 == True and flag == True:
+        return True
+    else:
+        return False
+
+def check_and(s):
+    flag = True
+    flag2 = True
+    s2 = ' '.join(s.split(' '))
+    if s != s2:
+        flag2 = False
+    a = s2.find('and')
+    if a > -1:
+        if s2[a-1] == ' ' and  s2[a+2] == ' ':
+            flag = True
+        elif s2[a-1] == ')' and  s2[a+2] == '(':
+            flag = False
+    if flag2 == True and flag == True:
+        return True
+    else:
+        return False
 
 with open("example.txt", "r") as file:
     line = list(file)
