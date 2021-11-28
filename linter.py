@@ -17,9 +17,65 @@ def check_plus(s):
     else:
         return False
 
-# def check_more(s):
+def check_dvsn(s):
+    flag2 = True
+    s2 = ' '.join(s.split(' '))
+    if s != s2:
+        flag2 = False
+    for i in range(len(s2)):
+        if s2[i] == '/':
+            if s2[i]+s2[i+1] == '/ ' and s2[i-1]+s2[i] == ' /' and s2[i+2] != ' ' and s2[i-2] != ' ':
+                flag = True
+            else:
+                flag = False
+    if flag2 == True and flag == True:
+        return True
+    else:
+        return False        
+
+def check_more(s):
+    flag = True
+    flag2 = True
+    s = s.replace('>=','')
+    s = s.replace('<=','')
+    s = s.replace('<>','')
+    s2 = ' '.join(s.split(' '))
+    if s != s2:
+        flag2 = False
+    else:
+        for i in range(len(s2)):
+            if s2[i] == '>':
+                if s2[i]+s2[i+1] == '> ' and s2[i-1]+s2[i] == ' >' and s2[i+2] != ' ' and s2[i-2] != ' ':
+                    flag = True
+                else:
+                    flag = False
+    if flag2 == True and flag == True:
+        return True
+    else:
+        return False
+
     
-# def check_less(s):
+def check_less(s):
+    def check_more(s):
+    flag = True
+    flag2 = True
+    s = s.replace('>=','')
+    s = s.replace('<=','')
+    s = s.replace('<>','')
+    s2 = ' '.join(s.split(' '))
+    if s != s2:
+        flag2 = False
+    else:
+        for i in range(len(s2)):
+            if s2[i] == '<':
+                if s2[i]+s2[i+1] == '< ' and s2[i-1]+s2[i] == ' <' and s2[i+2] != ' ' and s2[i-2] != ' ':
+                    flag = True
+                else:
+                    flag = False
+    if flag2 == True and flag == True:
+        return True
+    else:
+        return False
     
 
 def check_mr_eq(s):
@@ -93,12 +149,13 @@ def check_or(s):
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
-    else:
-        s = s.split(' ')
-        for i in range(len(s)):
-            if s[i].isalnum == False:
-                if s[i].find('or') > -1:
-
+    def check_or(s):
+    a = s.find('or')
+    if a > -1:
+        if s2[a-1] == ' ' and  s2[a+2] == ' ':
+            return True
+        elif s2[a-1] == ')' and  s2[a+2] == '(':
+            return False
 
 with open("example.txt", "r") as file:
     line = list(file)
