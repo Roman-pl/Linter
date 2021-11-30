@@ -1,6 +1,9 @@
 flag = True
 FlagGlobal = True
-
+a = []
+b = []
+s2 =''
+b2 =''
 def check_plus(s):
     flag2 = True
     flag = True
@@ -210,43 +213,48 @@ def string(s):
 with open("example.txt", "r") as file:
     line = list(file)
 for i in range(len(line)):
-    if line[i].find('///') > -1:
-        a = ' '.join(line[i].split('///'))
-    if line[i].find('//') > -1:
-        a = ' '.join(line[i].split('//'))
-    line[i] = a[0]
     line[i] = string(line[i])
+    if line[i].find('///') > -1:
+        a = line[i].split('///')
+        line[i] = a[0]
+    if line[i].find('//') > -1:
+        a = line[i].split('//')
+        line[i] = a[0]
+
 for i in range(len(line)):
-    if line[i].find('+'):
-        if check_plus(line[i]) == False:
-            FlagGlobal = False
-    if line[i].find('and'):
-        if check_and(line[i]) == False:
-            FlagGlobal = False
-    if line[i].find('='):
-        if check_eq(line[i]) == False:
-            FlagGlobal = False
-    if line[i].find('<='):
-        if check_ls_eq(line[i]) == False:
-            FlagGlobal = False
-    if line[i].find('>='):
-        if check_mr_eq(line[i]) == False:
-            FlagGlobal = False
-    if line[i].find(':='):
-        if check_assg(line[i]) == False:
-            FlagGlobal = False
-    if line[i].find('\\'):
-        if check_dvsn(line[i]) == False:
-            FlagGlobal = False
-    if line[i].find('or'):
-        if check_or(line[i]) == False:
-            FlagGlobal = False
-    if line[i].find('<'):
-        if check_less(line[i]) == False:
-            FlagGlobal = False
-    if line[i].find('>'):
-        if check_more(line[i]) == False:
-            FlagGlobal = False
+    b.append(line[i])
+line = ' '.join(b)
+
+if line.find('+'):
+    if check_plus(line) == False:
+        FlagGlobal = False
+if line.find('and'):
+    if check_and(line) == False:
+        FlagGlobal = False
+if line.find('='):
+    if check_eq(line) == False:
+        FlagGlobal = False
+if line.find('<='):
+    if check_ls_eq(line) == False:
+        FlagGlobal = False
+if line.find('>='):
+    if check_mr_eq(line) == False:
+        FlagGlobal = False
+if line.find(':='):
+    if check_assg(line) == False:
+        FlagGlobal = False
+if line.find('\\'):
+    if check_dvsn(line) == False:
+        FlagGlobal = False
+if line.find('or'):
+    if check_or(line) == False:
+        FlagGlobal = False
+if line.find('<'):
+    if check_less(line) == False:
+        FlagGlobal = False
+if line.find('>'):
+    if check_more(line) == False:
+        FlagGlobal = False
 
 with open("check_list.txt", "a") as file:
     print(FlagGlobal, file=file)
