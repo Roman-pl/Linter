@@ -18,6 +18,23 @@ def check_plus(s):
     else:
         return False
 
+def check_mines(s):
+    flag2 = True
+    flag = True
+    s2 = ' '.join(s.split(' '))
+    if s != s2:
+        flag2 = False
+    for i in range(len(s2)):
+        if s2[i] == '-':
+            if s2[i]+s2[i+1] == '- ' and s2[i-1]+s2[i] == ' -' and s2[i+2] != ' ' and s2[i-2] != ' ':
+                flag = True
+            else:
+                flag = False
+    if flag2 == True and flag == True:
+        return True
+    else:
+        return False
+
 def check_dvsn(s):
     flag2 = True
     flag = True
@@ -176,8 +193,29 @@ def check_and(s):
     else:
         return False
 
+def string(s):
+    b = list(s)
+    while s.find("'") > -1:
+        a = s.find("'")
+        b = list(s)
+        b[a] = "`"
+        s = "".join(b)
+        c = s.find("'")
+        for i in range(a,c+1):
+            b[i] = ''
+        s = "".join(b)
+    s = "".join(b)
+    return s
+
 with open("example.txt", "r") as file:
     line = list(file)
+for i in range(len(line)):
+    if line[i].find('///') > -1:
+        a = ' '.join(line[i].split('///'))
+    if line[i].find('//') > -1:
+        a = ' '.join(line[i].split('//'))
+    line[i] = a[0]
+    line[i] = string(line[i])
 for i in range(len(line)):
     if line[i].find('+'):
         if check_plus(line[i]) == False:
