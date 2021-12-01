@@ -225,16 +225,17 @@ for i in range(len(line)):
 
 for i in range(len(line)):
     b.append(line[i])
-line = ' '.join(b)
-while line.find("{") > -1:
-        n = line.find("{")
-        z = list(line)
-        line = "".join(z)
-        c = line.find("}")
-        for i in range(n,c+1):
-            z[i] = ''
-        s = "".join(z)
-    line = "".join(z)
+line = ''.join(b)
+
+while line.find('{') > -1:
+    k = line.find('{') 
+    l = line.find('}')
+    arr = list(line)
+    for i in range(k,l+1):
+        arr[i] = ''
+    line = "".join(arr)
+    
+line = "".join(arr)
 
 if line.find('+'):
     if check_plus(line) == False:
