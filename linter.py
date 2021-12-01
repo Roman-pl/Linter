@@ -2,6 +2,8 @@ flag = True
 FlagGlobal = True
 a = []
 b = []
+z = []
+n = 0
 s2 =''
 b2 =''
 def check_plus(s):
@@ -224,6 +226,15 @@ for i in range(len(line)):
 for i in range(len(line)):
     b.append(line[i])
 line = ' '.join(b)
+while line.find("{") > -1:
+        n = line.find("{")
+        z = list(line)
+        line = "".join(z)
+        c = line.find("}")
+        for i in range(n,c+1):
+            z[i] = ''
+        s = "".join(z)
+    line = "".join(z)
 
 if line.find('+'):
     if check_plus(line) == False:
