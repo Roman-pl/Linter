@@ -223,19 +223,41 @@ for i in range(len(line)):
         a = line[i].split('//')
         line[i] = a[0]
 
-for i in range(len(line)):
-    b.append(line[i])
-line = ''.join(b)
 
-while line.find('{') > -1:
-    k = line.find('{') 
-    l = line.find('}')
-    arr = list(line)
-    for i in range(k,l+1):
-        arr[i] = ''
-    line = "".join(arr)
-    
-line = "".join(arr)
+
+for i in range(len(line)):
+    s = ''.join(line[i])
+    if s.find('{') > -1:
+        x = s.find('{') 
+        flag = True
+        while flag == True:
+            s = list(s)
+            if s[x] == '}':
+                flag = False
+            s[x] = ''
+            x += 1
+            line[i] = s
+            
+count = 0
+a = []
+
+for i in range(len(line)):
+    s = ''.join(line[i])
+    if s.find('end') == -1:
+        if s.startswith(' '*count*4) == False: 
+            FlagGlobal = False
+            
+    if s.find('begin') > -1:
+        count += 1
+    if s.find('end') > -1:
+        count += -1
+        
+    if s.find('if') > -1:
+        a = s.split('then')
+        if  a[1].isspace() == False:
+            FlagGlobal = False
+
+
 
 if line.find('+'):
     if check_plus(line) == False:
@@ -271,3 +293,15 @@ if line.find('>'):
 with open("check_list.txt", "a") as file:
     print(FlagGlobal, file=file)
 
+count = 0
+a = []
+line = ['begin',' if nn;kjn then sfdDF','    asassadadaa','end']
+for i in range(len(line)):
+    if line[i].find('end') == -1: 
+        if not line[i].startswith(' '*count*4):
+            print('false')
+    if line[i].find('begin') > -1:
+        count += 1
+    if line[i].find('end') > -1:
+        count += -1
+    if line[i].find('if'):
