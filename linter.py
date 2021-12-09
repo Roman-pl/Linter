@@ -237,7 +237,7 @@ for i in range(len(line)):
             s[x] = ''
             x += 1
             line[i] = s
-            
+
 count = 0
 a = []
 
@@ -258,50 +258,38 @@ for i in range(len(line)):
             FlagGlobal = False
 
 
-
-if line.find('+'):
-    if check_plus(line) == False:
-        FlagGlobal = False
-if line.find('and'):
-    if check_and(line) == False:
-        FlagGlobal = False
-if line.find('='):
-    if check_eq(line) == False:
-        FlagGlobal = False
-if line.find('<='):
-    if check_ls_eq(line) == False:
-        FlagGlobal = False
-if line.find('>='):
-    if check_mr_eq(line) == False:
-        FlagGlobal = False
-if line.find(':='):
-    if check_assg(line) == False:
-        FlagGlobal = False
-if line.find('\\'):
-    if check_dvsn(line) == False:
-        FlagGlobal = False
-if line.find('or'):
-    if check_or(line) == False:
-        FlagGlobal = False
-if line.find('<'):
-    if check_less(line) == False:
-        FlagGlobal = False
-if line.find('>'):
-    if check_more(line) == False:
-        FlagGlobal = False
+for i in range(len(line)):
+    s = ''.join(line[i])
+    if s.find('+') > -1:
+        if check_plus(s) == False:
+            FlagGlobal = False
+    if s.find('and') > -1:
+        if check_and(s) == False:
+            FlagGlobal = False
+    if s.find('=') > -1:
+        if check_eq(s) == False:
+            FlagGlobal = False
+    if s.find('<=') > -1:
+        if check_ls_eq(s) == False:
+            FlagGlobal = False
+    if s.find('>=') > -1:
+        if check_mr_eq(s) == False:
+            FlagGlobal = False
+    if s.find(':=') > -1:
+        if check_assg(s) == False:
+            FlagGlobal = False
+    if s.find('\\') > -1:
+        if check_dvsn(s) == False:
+            FlagGlobal = False
+    if s.find('or') > -1:
+        if check_or(s) == False:
+            FlagGlobal = False
+    if s.find('<') > -1:
+        if check_less(s) == False:
+            FlagGlobal = False
+    if s.find('>') > -1:
+        if check_more(s) == False:
+            FlagGlobal = False
 
 with open("check_list.txt", "a") as file:
     print(FlagGlobal, file=file)
-
-count = 0
-a = []
-line = ['begin',' if nn;kjn then sfdDF','    asassadadaa','end']
-for i in range(len(line)):
-    if line[i].find('end') == -1: 
-        if not line[i].startswith(' '*count*4):
-            print('false')
-    if line[i].find('begin') > -1:
-        count += 1
-    if line[i].find('end') > -1:
-        count += -1
-    if line[i].find('if'):
