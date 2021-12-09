@@ -271,23 +271,3 @@ if line.find('>'):
 with open("check_list.txt", "a") as file:
     print(FlagGlobal, file=file)
 
-
-
-
-
-count = 0
-a = []
-line = ['     begin','    if nn;kjn then','    asassadadaa','end']
-for i in range(len(line)):
-    if line[i].find('end') == -1: 
-        if not line[i].startswith(' '*count*4):
-            print('false')
-    if line[i].find('begin') > -1:
-        count += 1
-    if line[i].find('end') > -1:
-        count += -1
-
-    if line[i].find('if') > -1:
-        a = line[i].split('then')
-        if not a[1].isspace():
-            print('false')
