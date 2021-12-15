@@ -3,61 +3,57 @@ FlagGlobal = True
 a = []
 b = []
 z = []
+x = []
 n = 0
+s = ''
 s2 =''
 b2 =''
-def check_plus(s):
+def check_plus(s,s1):
     flag2 = True
     flag = True
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
-    for i in range(len(s2)):
-        if s2[i] == '+':
-            if s2[i]+s2[i+1] == '+ ' and s2[i-1]+s2[i] == ' +' and s2[i+2] != ' ' and s2[i-2] != ' ':
-                flag = True
-            else:
-                flag = False
+    else:
+        s2 = s2.replace(s1,'')
+        if s2.find('+') > -1:
+            flag = False
     if flag2 == True and flag == True:
         return True
     else:
         return False
 
-def check_mines(s):
+def check_mines(s,s1):
     flag2 = True
     flag = True
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
-    for i in range(len(s2)):
-        if s2[i] == '-':
-            if s2[i]+s2[i+1] == '- ' and s2[i-1]+s2[i] == ' -' and s2[i+2] != ' ' and s2[i-2] != ' ':
-                flag = True
-            else:
-                flag = False
+    else:
+        s2 = s2.replace(s1,'')
+        if s2.find('-') > -1:
+            flag = False
     if flag2 == True and flag == True:
         return True
     else:
         return False
 
-def check_dvsn(s):
+def check_dvsn(s,s1):
     flag2 = True
     flag = True
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
-    for i in range(len(s2)):
-        if s2[i] == '/':
-            if s2[i]+s2[i+1] == '/ ' and s2[i-1]+s2[i] == ' /' and s2[i+2] != ' ' and s2[i-2] != ' ':
-                flag = True
-            else:
-                flag = False
+    else:
+        s2 = s2.replace(s1,'')
+        if s2.find('/') > -1:
+            flag = False
     if flag2 == True and flag == True:
         return True
     else:
         return False        
 
-def check_more(s):
+def check_more(s,s1):
     flag = True
     flag2 = True
     s = s.replace('>=','')
@@ -67,18 +63,15 @@ def check_more(s):
     if s != s2:
         flag2 = False
     else:
-        for i in range(len(s2)):
-            if s2[i] == '>':
-                if s2[i]+s2[i+1] == '> ' and s2[i-1]+s2[i] == ' >' and s2[i+2] != ' ' and s2[i-2] != ' ':
-                    flag = True
-                else:
-                    flag = False
+        s2 = s2.replace(s1,'')
+        if s2.find('>') > -1:
+            flag = False
     if flag2 == True and flag == True:
         return True
     else:
         return False
 
-def check_less(s):
+def check_less(s,s1):
     flag = True
     flag2 = True
     s = s.replace('>=','')
@@ -88,25 +81,22 @@ def check_less(s):
     if s != s2:
         flag2 = False
     else:
-        for i in range(len(s2)):
-            if s2[i] == '<':
-                if s2[i]+s2[i+1] == '< ' and s2[i-1]+s2[i] == ' <' and s2[i+2] != ' ' and s2[i-2] != ' ':
-                    flag = True
-                else:
-                    flag = False
+        s2 = s2.replace(s1,'')
+        if s2.find('<') > -1:
+            flag = False
     if flag2 == True and flag == True:
         return True
     else:
         return False
     
-def check_mr_eq(s):
+def check_mr_eq(s,s1):
     flag = True
     flag2 = True
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
     else:
-        s2 = s2.replace(' >= ','')
+        s2 = s2.replace(s1,'')
         if s2.find('>=') > -1:
             flag = False
     if flag == True and flag2 == True:
@@ -114,14 +104,14 @@ def check_mr_eq(s):
     else:
         return False
 
-def check_assg(s):
+def check_assg(s,s1):
     flag = True
     flag2 = True
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
     else:
-        s2 = s2.replace(' := ','')
+        s2 = s2.replace(s1,'')
         if s2.find(':=') > -1:
             flag = False
     if flag == True and flag2 == True:
@@ -129,14 +119,14 @@ def check_assg(s):
     else:
         return False
 
-def check_ls_eq(s):
+def check_ls_eq(s,s1):
     flag = True
     flag2 = True
     s2 = ' '.join(s.split(' '))
     if s != s2:
         flag2 = False
     else:
-        s2 = s2.replace(' <= ','')
+        s2 = s2.replace(s1,'')
         if s2.find('<=') > -1:
             flag = False
     if flag == True and flag2 == True:
@@ -144,7 +134,7 @@ def check_ls_eq(s):
     else:
         return False
 
-def check_eq(s):
+def check_eq(s,s1):
     flag = True
     flag2 = True
     s = s.replace('>=','')
@@ -153,12 +143,9 @@ def check_eq(s):
     if s != s2:
         flag2 = False
     else:
-        for i in range(len(s2)):
-            if s2[i] == '=':
-                if s2[i]+s2[i+1] == '= ' and s2[i-1]+s2[i] == ' =' and s2[i+2] != ' ' and s2[i-2] != ' ':
-                    flag = True
-                else:
-                    flag = False
+        s2 = s2.replace(s1,'')
+        if s2.find('=') > -1:
+            flag = False
     if flag2 == True and flag == True:
         return True
     else:
@@ -210,10 +197,36 @@ def string(s):
             b[i] = ''
         s = "".join(b)
     s = "".join(b)
+    while s.find('"') > -1:
+        a = s.find('"')
+        b = list(s)
+        b[a] = '`'
+        s = ''.join(b)
+        c = s.find('"')
+        for i in range(a,c+1):
+            b[i] = ''
+        s = ''.join(b)
+    s = ''.join(b)
     return s
 
 with open("example.txt", "r") as file:
     line = list(file)
+
+with open("settings.ini", "r") as file:
+    z = list(file)
+
+for i in range(len(z)):
+    if z[i].find('Tab')  > -1:
+       x = z[i].split(' ')
+       z[i] = x[2]
+    else:
+        x = z[i].split('-')
+        z[i] = x[2].replace("'","")
+
+    if  z[i].find('-') > -1:
+        s = z[i].replace('-','',2)
+        z[i] = s.replace("'",'')
+
 for i in range(len(line)):
     line[i] = string(line[i])
     if line[i].find('///') > -1:
@@ -222,8 +235,6 @@ for i in range(len(line)):
     if line[i].find('//') > -1:
         a = line[i].split('//')
         line[i] = a[0]
-
-
 
 for i in range(len(line)):
     s = ''.join(line[i])
@@ -244,7 +255,7 @@ a = []
 for i in range(len(line)):
     s = ''.join(line[i])
     if s.find('end') == -1:
-        if s.startswith(' '*count*4) == False: 
+        if s.startswith('   '*count*z[0]) == False: 
             FlagGlobal = False
             
     if s.find('begin') > -1:
@@ -257,38 +268,37 @@ for i in range(len(line)):
         if  a[1].isspace() == False:
             FlagGlobal = False
 
-
 for i in range(len(line)):
     s = ''.join(line[i])
     if s.find('+') > -1:
-        if check_plus(s) == False:
+        if check_plus(s,z[1]) == False:
             FlagGlobal = False
     if s.find('and') > -1:
         if check_and(s) == False:
             FlagGlobal = False
     if s.find('=') > -1:
-        if check_eq(s) == False:
+        if check_eq(s,z[3]) == False:
             FlagGlobal = False
     if s.find('<=') > -1:
-        if check_ls_eq(s) == False:
+        if check_ls_eq(s,z[7]) == False:
             FlagGlobal = False
     if s.find('>=') > -1:
-        if check_mr_eq(s) == False:
+        if check_mr_eq(s,z[6]) == False:
             FlagGlobal = False
     if s.find(':=') > -1:
-        if check_assg(s) == False:
+        if check_assg(s,z[9]) == False:
             FlagGlobal = False
-    if s.find('\\') > -1:
-        if check_dvsn(s) == False:
+    if s.find('/') > -1:
+        if check_dvsn(s,z[9]) == False:
             FlagGlobal = False
     if s.find('or') > -1:
         if check_or(s) == False:
             FlagGlobal = False
     if s.find('<') > -1:
-        if check_less(s) == False:
+        if check_less(s,z[5]) == False:
             FlagGlobal = False
     if s.find('>') > -1:
-        if check_more(s) == False:
+        if check_more(s,z[4]) == False:
             FlagGlobal = False
 
 with open("check_list.txt", "a") as file:
