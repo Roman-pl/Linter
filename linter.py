@@ -221,7 +221,7 @@ for i in range(len(z)):
        z[i] = x[2]
     else:
         x = z[i].split('-')
-        z[i] = x[2].replace("'","")
+        z[i] = x[1].replace("'","")
 
     if  z[i].find('-') > -1:
         s = z[i].replace('-','',2)
