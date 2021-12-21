@@ -188,10 +188,6 @@ def check_and(s):
 def string(s):
     b = list(s)
     while s.find("'") > -1:
-        a = s.find("'")
-        b = list(s)
-        b[a] = "`"
-        s = "".join(b)
         c = s.find("'")
         for i in range(a,c+1):
             b[i] = ''
@@ -203,8 +199,6 @@ def string(s):
         b[a] = '`'
         s = ''.join(b)
         c = s.find('"')
-        for i in range(a,c+1):
-            b[i] = ''
         s = ''.join(b)
     s = ''.join(b)
     return s
@@ -214,18 +208,13 @@ with open("example.txt", "r") as file:
 
 with open("settings.ini", "r") as file:
     z = list(file)
-
-for i in range(len(z)):
-    if z[i].find('Tab')  > -1:
-       x = z[i].split(' ')
        z[i] = x[2]
-    else:
-        x = z[i].split('-')
-        z[i] = x[1].replace("'","")
-
-    if  z[i].find('-') > -1:
+    elif z[i].find('-') > -1:
         s = z[i].replace('-','',2)
         z[i] = s.replace("'",'')
+    else:
+        x = z[i].split('-')
+        z[i] = x[0].replace("'","")
 
 for i in range(len(line)):
     line[i] = string(line[i])
@@ -236,26 +225,31 @@ for i in range(len(line)):
         a = line[i].split('//')
         line[i] = a[0]
 
+flag = False
 for i in range(len(line)):
     s = ''.join(line[i])
     if s.find('{') > -1:
         x = s.find('{') 
         flag = True
-        while flag == True:
-            s = list(s)
+    if flag == True:
+        s = list(s)
+        for x in range(x,len(s)):
             if s[x] == '}':
                 flag = False
-            s[x] = ''
-            x += 1
-            line[i] = s
-
+                s[x] = '' 
+                break
+            else:
+                s[x] = '' 
+        line[i] = ''.join(s)
+        x = 0
+        
 count = 0
 a = []
 
 for i in range(len(line)):
     s = ''.join(line[i])
     if s.find('end') == -1:
-        if s.startswith('   '*count*z[0]) == False: 
+        if s.startswith('   '*count*int(z[0])) == False: 
             FlagGlobal = False
             
     if s.find('begin') > -1:
