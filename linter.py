@@ -207,14 +207,14 @@ with open("example.txt", "r") as file:
     line = list(file)
 
 with open("settings.ini", "r") as file:
-    z = list(file)
-       z[i] = x[2]
-    elif z[i].find('-') > -1:
-        s = z[i].replace('-','',2)
-        z[i] = s.replace("'",'')
+    l = list(file)
+
+for i in range(len(l)):
+    if l[i].find('Tab')>-1:
+        s = l[i]
+        z.append(int(s[6]))
     else:
-        x = z[i].split('-')
-        z[i] = x[0].replace("'","")
+        z.append(l[i][5:len(l[i])-2].replace("'",""))
 
 for i in range(len(line)):
     line[i] = string(line[i])
@@ -249,7 +249,7 @@ a = []
 for i in range(len(line)):
     s = ''.join(line[i])
     if s.find('end') == -1:
-        if s.startswith('   '*count*int(z[0])) == False: 
+        if s.startswith(' '*4*count*z[0]) == False: 
             FlagGlobal = False
             
     if s.find('begin') > -1:
@@ -283,7 +283,7 @@ for i in range(len(line)):
         if check_assg(s,z[9]) == False:
             FlagGlobal = False
     if s.find('/') > -1:
-        if check_dvsn(s,z[9]) == False:
+        if check_dvsn(s,z[10]) == False:
             FlagGlobal = False
     if s.find('or') > -1:
         if check_or(s) == False:
@@ -294,6 +294,5 @@ for i in range(len(line)):
     if s.find('>') > -1:
         if check_more(s,z[4]) == False:
             FlagGlobal = False
-
 with open("check_list.txt", "a") as file:
     print(FlagGlobal, file=file)
