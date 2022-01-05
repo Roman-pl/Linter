@@ -11,10 +11,7 @@ b2 =''
 def check_plus(s,s1):
     flag2 = True
     flag = True
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
-    else:
+    s2 = s
         s2 = s2.replace(s1,'')
         if s2.find('+') > -1:
             flag = False
@@ -26,10 +23,7 @@ def check_plus(s,s1):
 def check_mines(s,s1):
     flag2 = True
     flag = True
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
-    else:
+    s2 = s
         s2 = s2.replace(s1,'')
         if s2.find('-') > -1:
             flag = False
@@ -41,10 +35,7 @@ def check_mines(s,s1):
 def check_dvsn(s,s1):
     flag2 = True
     flag = True
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
-    else:
+    s2 = s
         s2 = s2.replace(s1,'')
         if s2.find('/') > -1:
             flag = False
@@ -59,10 +50,7 @@ def check_more(s,s1):
     s = s.replace('>=','')
     s = s.replace('<=','')
     s = s.replace('<>','')
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
-    else:
+    s2 = s
         s2 = s2.replace(s1,'')
         if s2.find('>') > -1:
             flag = False
@@ -77,10 +65,7 @@ def check_less(s,s1):
     s = s.replace('>=','')
     s = s.replace('<=','')
     s = s.replace('<>','')
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
-    else:
+    s2 = s
         s2 = s2.replace(s1,'')
         if s2.find('<') > -1:
             flag = False
@@ -92,10 +77,7 @@ def check_less(s,s1):
 def check_mr_eq(s,s1):
     flag = True
     flag2 = True
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
-    else:
+    s2 = s
         s2 = s2.replace(s1,'')
         if s2.find('>=') > -1:
             flag = False
@@ -107,13 +89,10 @@ def check_mr_eq(s,s1):
 def check_assg(s,s1):
     flag = True
     flag2 = True
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
-    else:
-        s2 = s2.replace(s1,'')
-        if s2.find(':=') > -1:
-            flag = False
+    s2 = s
+    s2 = s2.replace(s1,'')
+    if s2.find(':=') > -1:
+        flag = False
     if flag == True and flag2 == True:
         return True
     else:
@@ -122,13 +101,10 @@ def check_assg(s,s1):
 def check_ls_eq(s,s1):
     flag = True
     flag2 = True
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
-    else:
-        s2 = s2.replace(s1,'')
-        if s2.find('<=') > -1:
-            flag = False
+    s2 = s
+    s2 = s2.replace(s1,'')
+    if s2.find('<=') > -1:
+        flag = False
     if flag == True and flag2 == True:
         return True
     else:
@@ -139,13 +115,10 @@ def check_eq(s,s1):
     flag2 = True
     s = s.replace('>=','')
     s = s.replace('<=','')
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
-    else:
-        s2 = s2.replace(s1,'')
-        if s2.find('=') > -1:
-            flag = False
+    s2 = s
+    s2 = s2.replace(s1,'')
+    if s2.find('=') > -1:
+        flag = False
     if flag2 == True and flag == True:
         return True
     else:
@@ -154,9 +127,7 @@ def check_eq(s,s1):
 def check_or(s):
     flag = True
     flag2 = True
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
+    s2 = s
     a = s2.find('or')
     if a > -1:
         if s2[a-1] == ' ' and  s2[a+2] == ' ':
@@ -171,9 +142,7 @@ def check_or(s):
 def check_and(s):
     flag = True
     flag2 = True
-    s2 = ' '.join(s.split(' '))
-    if s != s2:
-        flag2 = False
+    s2 = s
     a = s2.find('and')
     if a > -1:
         if s2[a-1] == ' ' and  s2[a+2] == ' ':
@@ -294,5 +263,6 @@ for i in range(len(line)):
     if s.find('>') > -1:
         if check_more(s,z[4]) == False:
             FlagGlobal = False
+
 with open("check_list.txt", "a") as file:
     print(FlagGlobal, file=file)
