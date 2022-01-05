@@ -1,3 +1,5 @@
+import tkinter as tk
+from tkinter import filedialog
 flag = True
 FlagGlobal = True
 a = []
@@ -12,9 +14,9 @@ def check_plus(s,s1):
     flag2 = True
     flag = True
     s2 = s
-        s2 = s2.replace(s1,'')
-        if s2.find('+') > -1:
-            flag = False
+    s2 = s2.replace(s1,'')
+    if s2.find('+') > -1:
+        flag = False
     if flag2 == True and flag == True:
         return True
     else:
@@ -24,9 +26,9 @@ def check_mines(s,s1):
     flag2 = True
     flag = True
     s2 = s
-        s2 = s2.replace(s1,'')
-        if s2.find('-') > -1:
-            flag = False
+    s2 = s2.replace(s1,'')
+    if s2.find('-') > -1:
+        flag = False
     if flag2 == True and flag == True:
         return True
     else:
@@ -36,9 +38,9 @@ def check_dvsn(s,s1):
     flag2 = True
     flag = True
     s2 = s
-        s2 = s2.replace(s1,'')
-        if s2.find('/') > -1:
-            flag = False
+    s2 = s2.replace(s1,'')
+    if s2.find('/') > -1:
+        flag = False
     if flag2 == True and flag == True:
         return True
     else:
@@ -51,9 +53,9 @@ def check_more(s,s1):
     s = s.replace('<=','')
     s = s.replace('<>','')
     s2 = s
-        s2 = s2.replace(s1,'')
-        if s2.find('>') > -1:
-            flag = False
+    s2 = s2.replace(s1,'')
+    if s2.find('>') > -1:
+        flag = False
     if flag2 == True and flag == True:
         return True
     else:
@@ -66,9 +68,9 @@ def check_less(s,s1):
     s = s.replace('<=','')
     s = s.replace('<>','')
     s2 = s
-        s2 = s2.replace(s1,'')
-        if s2.find('<') > -1:
-            flag = False
+    s2 = s2.replace(s1,'')
+    if s2.find('<') > -1:
+        flag = False
     if flag2 == True and flag == True:
         return True
     else:
@@ -78,9 +80,9 @@ def check_mr_eq(s,s1):
     flag = True
     flag2 = True
     s2 = s
-        s2 = s2.replace(s1,'')
-        if s2.find('>=') > -1:
-            flag = False
+    s2 = s2.replace(s1,'')
+    if s2.find('>=') > -1:
+        flag = False
     if flag == True and flag2 == True:
         return True
     else:
@@ -172,11 +174,23 @@ def string(s):
     s = ''.join(b)
     return s
 
-with open("example.txt", "r") as file:
-    line = list(file)
+print("проверяемый")
+root = tk.Tk()
+root.withdraw()
+file_path = filedialog.askopenfilename()
 
-with open("settings.ini", "r") as file:
-    l = list(file)
+file = open(file_path,"r")
+line = list(file)
+file.close()
+
+print("настройки")
+root = tk.Tk()
+root.withdraw()
+file_path = filedialog.askopenfilename()
+
+file = open(file_path,"r")
+l = list(file)
+file.close()
 
 for i in range(len(l)):
     if l[i].find('Tab')>-1:
