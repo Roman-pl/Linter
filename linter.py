@@ -239,11 +239,35 @@ for i in range(len(line)):
         count += 1
     if s.find('end') > -1:
         count += -1
+
+    if s.find('repeat') > -1:
+        count += 1
+    if s.find('until') > -1:
+        count += -1
         
     if s.find('if') > -1:
         a = s.split('then')
         if  a[1].isspace() == False:
             FlagGlobal = False
+
+for i in range(len(line)):
+    s = (line[i]).lower()
+    if s.find('for') > -1:
+        if s.find('do') == -1:
+            FlagGlobal = False
+    if s.find('for') > -1:
+        line[i+1] =  line[i+1].lower()
+        if line[i+1].find("begin") == -1:
+            if line[i+1].startswith("    ") == -1:
+                FlagGlobal = False
+
+for i in range(len(line)):
+    s = (line[i]).lower()
+    if s.find('while') > -1:
+        line[i+1] =  line[i+1].lower()
+        if line[i+1].find("begin") == -1:
+            if line[i+1].startswith("    ") == -1:
+                FlagGlobal = False
 
 for i in range(len(line)):
     s = ''.join(line[i])
