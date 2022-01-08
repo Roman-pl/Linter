@@ -263,7 +263,7 @@ for i in range(len(line)):
 
 for i in range(len(line)):
     s = (line[i]).lower()
-    if s.find('while') > -1:
+    if s.find('whiles') > -1:
         line[i+1] =  line[i+1].lower()
         if line[i+1].find("begin") == -1:
             if line[i+1].startswith("    ") == -1:
