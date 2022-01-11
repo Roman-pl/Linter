@@ -258,7 +258,7 @@ for i in range(len(line)):
     if s.find('for') > -1:
         line[i+1] =  line[i+1].lower()
         if line[i+1].find("begin") == -1:
-            if line[i+1].startswith("    ") == -1:
+            if line[i+1].startswith(" "*4*z[0]) == -1:
                 FlagGlobal = False
 
 for i in range(len(line)):
@@ -266,7 +266,7 @@ for i in range(len(line)):
     if s.find('whiles') > -1:
         line[i+1] =  line[i+1].lower()
         if line[i+1].find("begin") == -1:
-            if line[i+1].startswith("    ") == -1:
+            if line[i+1].startswith(" "*4*z[0]) == -1:
                 FlagGlobal = False
 
 for i in range(len(line)):
