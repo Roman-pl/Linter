@@ -129,7 +129,7 @@ def check_eq(s,s1):
 def check_or(s):
     flag = True
     flag2 = True
-    s2 = s
+    s2 = s.lower()
     a = s2.find('or')
     if a > -1:
         if s2[a-1] == ' ' and  s2[a+2] == ' ':
@@ -144,7 +144,7 @@ def check_or(s):
 def check_and(s):
     flag = True
     flag2 = True
-    s2 = s
+    s2 = s.lower()
     a = s2.find('and')
     if a > -1:
         if s2[a-1] == ' ' and  s2[a+2] == ' ':
