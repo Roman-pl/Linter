@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from tkinter import filedialog
 flag = True
 FlagGlobal = True
@@ -174,17 +175,17 @@ def string(s):
     s = ''.join(b)
     return s
 
-print("проверяемый")
 root = tk.Tk()
 root.withdraw()
+messagebox.showinfo("Linter", "выберите файл который вы хотите проверить")
 file_path = filedialog.askopenfilename()
 
 file = open(file_path,"r")
 line = list(file)
 file.close()
 
-print("настройки")
 root = tk.Tk()
+messagebox.showinfo("Linter", "выберите файл который вы хотите проверить")
 root.withdraw()
 file_path = filedialog.askopenfilename()
 
