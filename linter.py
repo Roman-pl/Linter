@@ -178,18 +178,18 @@ def string(s):
 root = tk.Tk()
 root.withdraw()
 messagebox.showinfo("Linter", "выберите файл который вы хотите проверить")
-file_path = filedialog.askopenfilename()
+file_path1 = filedialog.askopenfilename()
 
-file = open(file_path,"r")
+file = open(file_path1,"r")
 line = list(file)
 file.close()
 
 root = tk.Tk()
-messagebox.showinfo("Linter", "выберите файл который вы хотите проверить")
 root.withdraw()
-file_path = filedialog.askopenfilename()
+messagebox.showinfo("Linter", "выберете какой файл с настройками вы хотите применить")
+file_path2 = filedialog.askopenfilename()
 
-file = open(file_path,"r")
+file = open(file_path2,"r")
 l = list(file)
 file.close()
 
@@ -231,12 +231,12 @@ count = 0
 a = []
 
 for i in range(len(line)):
-    s = ''.join(line[i])
+    s = (line[i].lower())
     if s.find('end') == -1:
         if s.startswith(' '*4*count*z[0]) == False: 
             FlagGlobal = False
             
-    if s.find('begin') > -1:
+    if s.find('begin') > -1 or s.find("record")  > -1:
         count += 1
     if s.find('end') > -1:
         count += -1
@@ -248,6 +248,16 @@ for i in range(len(line)):
         
     if s.find('if') > -1:
         a = s.split('then')
+        if  a[1].isspace() == False:
+            FlagGlobal = False
+
+    if s.find(';') > -1:
+        a = s.split(';')
+        if  a[1].isspace() == False:
+            FlagGlobal = False
+
+    if s.find('var') > -1:
+        a = s.split('var')
         if  a[1].isspace() == False:
             FlagGlobal = False
 
@@ -264,17 +274,20 @@ for i in range(len(line)):
 
 for i in range(len(line)):
     s = (line[i]).lower()
-    if s.find('whiles') > -1:
+    if s.find('while') > -1:
         line[i+1] =  line[i+1].lower()
         if line[i+1].find("begin") == -1:
             if line[i+1].startswith(" "*4*z[0]) == -1:
                 FlagGlobal = False
-
+count = 0
+c = 1
 for i in range(len(line)):
+    count += 1
     s = ''.join(line[i])
     if s.find('+') > -1:
         if check_plus(s,z[1]) == False:
             FlagGlobal = False
+            c = count
     if s.find('and') > -1:
         if check_and(s) == False:
             FlagGlobal = False
@@ -304,4 +317,7 @@ for i in range(len(line)):
             FlagGlobal = False
 
 with open("check_list.txt", "a") as file:
-    print(FlagGlobal, file=file)
+    if FlagGlobal == False:
+        print('"',file_path1,'"',"Найдено не соответсвие в строке:",c,file = file)
+    else:
+        print('"',file_path1,'"',"Не соответсвий не найдено",file = file)
