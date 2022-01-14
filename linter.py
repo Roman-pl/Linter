@@ -11,6 +11,8 @@ n = 0
 s = ''
 s2 =''
 b2 =''
+c = 1
+ss = ''
 def check_plus(s,s1):
     flag2 = True
     flag = True
@@ -229,12 +231,14 @@ for i in range(len(line)):
         
 count = 0
 a = []
-
+c = 1
 for i in range(len(line)):
+    с = c + 1
     s = (line[i].lower())
     if s.find('end') == -1:
         if s.startswith(' '*4*count*z[0]) == False: 
             FlagGlobal = False
+            ss += str(c) + ','
             
     if s.find('begin') > -1 or s.find("record")  > -1:
         count += 1
@@ -247,30 +251,39 @@ for i in range(len(line)):
         count += -1
         
     if s.find('if') > -1:
-        a = s.split('then')
-        if  a[1].isspace() == False:
+        if s.find('then') > -1:
+            a = s.split('then')
+            if a[1].isspace() == False:
+                FlagGlobal = False
+                ss += str(c) + ','
+        else:
             FlagGlobal = False
 
     if s.find(';') > -1:
         a = s.split(';')
         if  a[1].isspace() == False:
             FlagGlobal = False
+            ss += str(c) + ','
 
     if s.find('var') > -1:
         a = s.split('var')
         if  a[1].isspace() == False:
             FlagGlobal = False
+            ss += str(c) + ','
 
 for i in range(len(line)):
     s = (line[i]).lower()
     if s.find('for') > -1:
         if s.find('do') == -1:
             FlagGlobal = False
+            ss += str(c) + ','
+
     if s.find('for') > -1:
         line[i+1] =  line[i+1].lower()
         if line[i+1].find("begin") == -1:
             if line[i+1].startswith(" "*4*z[0]) == -1:
                 FlagGlobal = False
+                ss += str(c) + ','
 
 for i in range(len(line)):
     s = (line[i]).lower()
@@ -279,45 +292,56 @@ for i in range(len(line)):
         if line[i+1].find("begin") == -1:
             if line[i+1].startswith(" "*4*z[0]) == -1:
                 FlagGlobal = False
+                ss += str(c) + ','
 count = 0
 c = 1
 for i in range(len(line)):
-    count += 1
+    c += 1
     s = ''.join(line[i])
     if s.find('+') > -1:
         if check_plus(s,z[1]) == False:
             FlagGlobal = False
-            c = count
+            ss += str(c) + ','
     if s.find('and') > -1:
         if check_and(s) == False:
             FlagGlobal = False
+            ss += str(c) + ','
     if s.find('=') > -1:
         if check_eq(s,z[3]) == False:
             FlagGlobal = False
+            ss += str(c) + ','
     if s.find('<=') > -1:
         if check_ls_eq(s,z[7]) == False:
             FlagGlobal = False
+            ss += str(c) + ','
     if s.find('>=') > -1:
         if check_mr_eq(s,z[6]) == False:
             FlagGlobal = False
+            ss += str(c) + ','
     if s.find(':=') > -1:
         if check_assg(s,z[9]) == False:
             FlagGlobal = False
+            ss += str(c) + ','
     if s.find('/') > -1:
         if check_dvsn(s,z[10]) == False:
             FlagGlobal = False
+            ss += str(c) + ','
     if s.find('or') > -1:
         if check_or(s) == False:
             FlagGlobal = False
+            ss += str(c) + ','
     if s.find('<') > -1:
         if check_less(s,z[5]) == False:
             FlagGlobal = False
+            ss += str(c) + ','
     if s.find('>') > -1:
         if check_more(s,z[4]) == False:
             FlagGlobal = False
+            ss += str(c) + ','
 
 with open("check_list.txt", "a") as file:
     if FlagGlobal == False:
-        print('"',file_path1,'"',"Найдено не соответсвие в строке:",c,file = file)
+        print('"',file_path1,'"',"Найдено не соответсвие в строке:",ss,file = file)
     else:
         print('"',file_path1,'"',"Не соответсвий не найдено",file = file)
+print(ss)
